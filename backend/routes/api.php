@@ -1,6 +1,10 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AuthController, NilaiController, SiswaController, IndikatorController, TahunAjaranController, UserController, RekapController};
+use App\Http\Controllers\{
+    AuthController, NilaiController, SiswaController, 
+    IndikatorController, TahunAjaranController, UserController, RekapController
+};
 
 Route::post('/login', [AuthController::class, 'login']);
 
