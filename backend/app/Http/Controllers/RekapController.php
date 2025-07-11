@@ -1,8 +1,18 @@
 <?php
-class SiswaController extends Controller {
-    public function index() { return Siswa::all(); }
-    public function store(Request $r) { return Siswa::create($r->all()); }
-    public function update(Request $r, $id) { $s = Siswa::findOrFail($id); $s->update($r->all()); return $s; }
-    public function destroy($id) { return Siswa::destroy($id); }
-}
+use PDF, Mail;
+use App\Mail\RekapNilaiTahunan;
 
+class RekapController extends Controller {
+    public function generatePDF($id) {
+        $siswa = Siswa::with('nilai.indikator')->findOrFail($id);
+        $pdf = PDF::loadView('rekap.pdf', compact('siswa'));
+        return $pdf->download('rekap-'.$siswa->nama.'.pdf');
+    }
+
+    public function sendToWali($id) {
+        $siswa = Siswa::with('nilai')->findOrFail($id);
+        $pdf = PDF::loadView('rekap.pdf', compact('siswa'))->output();
+        Mail::to($siswa->wali_email)->send(new RekapNilaiTahunan($pdf, $siswa->nama));
+        return response()->json(['message' => 'Email sent']);
+    }
+}
