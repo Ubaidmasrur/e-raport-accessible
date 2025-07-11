@@ -1,15 +1,16 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\NilaiController;
-use App\Http\Controllers\RekapController;
+use App\Http\Controllers\{AuthController, NilaiController, SiswaController, IndikatorController, TahunAjaranController, UserController, RekapController};
 
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', [AuthController::class, 'me']);
+    Route::get('/me', [AuthController::class, 'me']);
     Route::apiResource('nilai', NilaiController::class);
     Route::apiResource('siswa', SiswaController::class);
     Route::apiResource('indikator', IndikatorController::class);
-    Route::get('/rekap/pdf', [RekapController::class, 'generatePDF']);
+    Route::apiResource('tahunajaran', TahunAjaranController::class);
+    Route::apiResource('users', UserController::class);
+    Route::get('/rekap/pdf/{id}', [RekapController::class, 'generatePDF']);
+    Route::post('/rekap/email/{id}', [RekapController::class, 'sendToWali']);
 });
