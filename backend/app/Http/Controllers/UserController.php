@@ -1,7 +1,27 @@
 <?php
-class UserController extends Controller {
-    public function index() { return User::all(); }
-    public function store(Request $r) { return User::create($r->all()); }
-    public function update(Request $r, $id) { $u = User::findOrFail($id); $u->update($r->all()); return $u; }
-    public function destroy($id) { return User::destroy($id); }
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function index() {
+        return User::all();
+    }
+
+    public function store(Request $request) {
+        return User::create($request->all());
+    }
+
+    public function update(Request $request, $id) {
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return $user;
+    }
+
+    public function destroy($id) {
+        return User::destroy($id);
+    }
 }
