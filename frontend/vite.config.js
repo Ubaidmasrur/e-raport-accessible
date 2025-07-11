@@ -1,1 +1,2 @@
-// Vite config with PWA plugin
+import { VitePWA } from 'vite-plugin-pwa';
+export default { plugins: [VitePWA()] }

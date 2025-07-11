@@ -1,1 +1,1 @@
-// React form input nilai
+export default function InputNilai() { return <div>Input Form</div>; }

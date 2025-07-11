@@ -1,4 +1,1 @@
-{
-  "name": "E-Raport SMA",
-  "short_name": "E-Raport"
-}
+{ "name": "E-Raport", "start_url": ".", "display": "standalone" }

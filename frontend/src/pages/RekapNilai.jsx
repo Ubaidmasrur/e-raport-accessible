@@ -1,0 +1,1 @@
+export default function RekapNilai() { return <div>Rekap Grafik</div>; }

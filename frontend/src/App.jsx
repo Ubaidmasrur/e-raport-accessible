@@ -1,0 +1,1 @@
+export default function App() { return <div className='dark:bg-gray-900'>E-Raport</div>; }
